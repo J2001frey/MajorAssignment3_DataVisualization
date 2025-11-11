@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D3.js Force Layout: Author Network</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        #chart {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 1400px;
+        }
+
+        .node:hover {
+            stroke: #000;
+            stroke-width: 2px;
+        }
+
+        .tooltip {
+            position: absolute;
+            text-align: center;
+            padding: 8px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.2s;
+            font-size: 14px;
+        }
+
+        .controls {
+            padding: 20px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .legend-item {
+            display: inline-block;
+            margin-right: 15px;
+            font-size: 12px;
+        }
+
+        .legend-color {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 5px;
+            border: 1px solid #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container my-4">
+        <h1 class="text-center mb-4">D3.js Force Layout: Author Co-Authorship Network</h1>
+
+        <div class="controls">
+            <h5 class="mb-3">Force Simulation Parameters</h5>
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="charge-slider">Charge Strength (forceManyBody): <span
+                            id="charge-value">-30</span></label>
+                    <input type="range" class="custom-range" id="charge-slider" min="-100" max="0" value="-30" step="1">
+                </div>
+                <div class="col-md-4">
+                    <label for="collide-slider">Collide Radius Factor: <span id="collide-value">1.5</span></label>
+                    <input type="range" class="custom-range" id="collide-slider" min="0.5" max="5" value="1.5"
+                        step="0.1">
+                </div>
+                <div class="col-md-4">
+                    <label for="link-slider">Link Strength: <span id="link-value">0.7</span></label>
+                    <input type="range" class="custom-range" id="link-slider" min="0.1" max="1.0" value="0.7"
+                        step="0.05">
+                </div>
+            </div>
+        </div>
+
+        <div class="legend mb-3 text-center">
+            <h5 class="mb-2">Node Color Legend (Top 10 Affiliations)</h5>
+            <div id="legend-container"></div>
+            <div class="legend-item"><span class="legend-color"
+                    style="background-color: #A9A9A9; border: 1px solid #333;"></span>Other Countries</div>
+        </div>
+
+        <svg id="chart" width="100%" height="700"></svg>
+
+        <div class="tooltip" id="author-tooltip"></div>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="visualization.js"></script>
+
+</body>
+
+</html>
